@@ -1,10 +1,12 @@
 
 ext {
-    set('springCloudVersion', "Hoxton.SR9")
-    set('springCloudAlibabaVersion', "2.2.5.RELEASE")
+    set('springCloudVersion', "2020.0.0")
+    set('springCloudAlibabaVersion', "2020.0.RC1")
     set('springAlibabaVersion', "1.0.0")
     // 分离打包开关(打开后依赖与源码会分开)
     set('compileSeparate', true)
+    // docker打包环境
+    set('dockerEnv', 'local')
 
 
     dependencies = [
@@ -27,15 +29,9 @@ ext {
             'java-jwt' : 'com.auth0:java-jwt:3.9.0',
             'reflections' : 'org.reflections:reflections:0.9.12',
             'jaxb-impl' :'com.sun.xml.bind:jaxb-impl:3.0.0',
-            'spring-boot-admin-starter-server' : 'de.codecentric:spring-boot-admin-starter-server:2.3.1',
+            'spring-boot-admin-starter-server' : 'de.codecentric:spring-boot-admin-starter-server:2.4.0',
             'JustAuth' : 'me.zhyd.oauth:JustAuth:1.15.9',
             'bcprov-jdk14' : 'bouncycastle:bcprov-jdk14:139',
-            'dom4j' : 'dom4j:dom4j:1.6',
-            'seata-spring-boot-starter' : 'io.seata:seata-spring-boot-starter:1.4.1',
-
-            'jackson-annotations' : 'com.fasterxml.jackson.core:jackson-annotations:2.9.9',
-            'jackson-databind' : 'com.fasterxml.jackson.core:jackson-databind:2.9.9',
-            'jackson-datatype-jsr310' : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
     ]
 
 
@@ -63,15 +59,16 @@ ext {
     ]
 
     docker = [
+            // docker打包多环境配置,切换设置顶部dockerEnv
             'local':[
-                'baseImage' : 'myharbor.com:8080/library/openjdk:11.0.10-jre-buster',
-                 images : "myharbor.com:8080/own-projects/",
-                isRemortDocker: false,
-                credentials: {
-                    url = 'http://myharbor.com:8080'
-                    username = 'admin'
-                    password = 'QWEasd123'
-                }
+                    'baseImage' : 'myharbor.com:8080/library/openjdk:11.0.10-jre-buster',
+                    images : "myharbor.com:8080/own-projects/",
+                    isRemortDocker: false,
+                    credentials: {
+                        url = 'http://myharbor.com:8080'
+                        username = 'admin'
+                        password = 'QWEasd123'
+                    }
             ]
     ]
 

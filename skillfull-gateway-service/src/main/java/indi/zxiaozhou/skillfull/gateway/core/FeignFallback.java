@@ -10,7 +10,7 @@
 package indi.zxiaozhou.skillfull.gateway.core;
 
 
-import feign.hystrix.FallbackFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * feign fall back

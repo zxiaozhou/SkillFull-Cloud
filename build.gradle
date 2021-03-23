@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'java'
     id 'idea'
-    id 'org.springframework.boot' version '2.3.9.RELEASE'
+    id 'org.springframework.boot' version '2.4.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'com.bmuschko.docker-spring-boot-application' version '6.7.0'
 }
@@ -81,8 +81,8 @@ subprojects {
         }
     }
 
-    // docker打包local
-    def dockerInfo = rootProject.ext.docker['local']
+    // docker打包
+    def dockerInfo = rootProject.ext.docker[dockerEnv]
     // jar名称
     def jarBaseName = bootJar.archiveBaseName.get()
     // jar版本号
@@ -143,6 +143,7 @@ subprojects {
 
         compile 'io.micrometer:micrometer-registry-prometheus'
         compile 'org.springframework.cloud:spring-cloud-starter'
+        compile 'org.springframework.cloud:spring-cloud-starter-bootstrap'
         compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
         compile 'org.springframework.boot:spring-boot-starter-cache'
         compile 'org.springframework.boot:spring-boot-configuration-processor'
